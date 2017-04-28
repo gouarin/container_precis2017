@@ -1,0 +1,7 @@
+PROJECT(test C)
+
+CMAKE_MINIMUM_REQUIRED(VERSION 2.8)
+
+include_directories(${PETSC_INCLUDES})
+
+ADD_SUBDIRECTORY(Cversion)
