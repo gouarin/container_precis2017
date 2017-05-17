@@ -96,11 +96,13 @@ PetscErrorCode poissonFD2dMatVec(Vec x, Vec y, DM dm){
   
   ierr = DMDAVecRestoreArray(dm, xLocal, &px);CHKERRQ(ierr); 
   ierr = DMDAVecRestoreArray(dm, yLocal, &py);CHKERRQ(ierr); 
-  ierr = DMRestoreLocalVector(dm, &xLocal);CHKERRQ(ierr);
-  ierr = DMRestoreLocalVector(dm, &yLocal);CHKERRQ(ierr);
 
   ierr = DMLocalToGlobalBegin(dm, yLocal, ADD_VALUES, y);CHKERRQ(ierr); 
   ierr = DMLocalToGlobalEnd(dm, yLocal, ADD_VALUES, y);CHKERRQ(ierr); 
+
+  ierr = DMRestoreLocalVector(dm, &xLocal);CHKERRQ(ierr);
+  ierr = DMRestoreLocalVector(dm, &yLocal);CHKERRQ(ierr);
+
   ierr = PetscLogFlops(7.*info.mx*info.my);CHKERRQ(ierr);
   PetscFunctionReturn(0);
 }
